@@ -27,4 +27,5 @@ ENV DISPLAY=:99
 
 RUN pip install --upgrade pip
 
-# RUN pip install -r requirements.txt
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
