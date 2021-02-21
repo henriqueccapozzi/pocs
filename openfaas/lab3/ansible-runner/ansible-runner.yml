@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  ansible-runner:
+    environment:
+      write_debug: true
+      ans: 'rodando dentro do openfaas'
+    lang: dockerfile
+    handler: ./ansible-runner
+    image: henriqueccapozzi/ansible-runner:latest
+

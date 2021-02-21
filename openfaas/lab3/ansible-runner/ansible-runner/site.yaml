@@ -1,0 +1,5 @@
+- hosts: all
+  connection: local
+  tasks:
+    - debug:
+        msg: "Debug dentro do ansible. {{ cli_var | default('') }} {{ lookup('env', 'ans') }}"
