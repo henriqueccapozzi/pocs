@@ -1,0 +1,28 @@
+version: '3'
+services: 
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.8-management-alpine
+    cpus: 0.5
+    mem_limit: 500Mb
+    ports:
+    - 8080:15672
+    volumes: 
+    - rabbitmq-data:/var/lib/rabbitmq
+  debug:
+    image: alpine
+    command: tail -f /dev/null
+
+  producer:
+    build: ./client/
+    cpus: 0.5
+    mem_limit: 100Mb
+    command: tail -f /dev/null
+    working_dir: /work
+    ports:
+      - 7000:7000
+    volumes: 
+      - ./producer/work:/work
+
+volumes: 
+  rabbitmq-data:
