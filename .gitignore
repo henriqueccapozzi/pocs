@@ -4,3 +4,7 @@
 
 #Visual studio code configuration
 .vscode/*
+
+#Node modules for children
+**/node_modules/*
+*/node_modules/*
