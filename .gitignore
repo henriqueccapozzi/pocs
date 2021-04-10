@@ -1,6 +1,7 @@
 #Ignore python virtual environment files
-*/venv/*
-*/env/*
+**/venv/*
+**/env/*
+**/.env/*
 
 #Visual studio code configuration
 .vscode/*
