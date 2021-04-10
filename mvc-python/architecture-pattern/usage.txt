@@ -1,0 +1,22 @@
+>>> from view import UserView
+>>> display = UserView()
+>>> display.create_user()
+username: henrique
+email: henrique@abc.com
+Success>>>User created!
+>>> display.create_user()
+username: fulano
+email: fulano@silva.com
+Success>>>User created!
+>>> display.get_user()
+user id: 2
+Success>>>fulano;fulano@silva.com
+>>> 
+>>> display.get_user()
+user id: 1
+Success>>>henrique;henrique@abc.com
+>>> 
+>>> display.create_user()
+username: abc
+email: asd.com
+Error>>>Email not valid

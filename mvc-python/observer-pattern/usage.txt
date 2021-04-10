@@ -1,0 +1,19 @@
+>>> from user import User
+>>> import playlist
+>>> simon = User('Simon')
+>>> tina = User('Tina')
+>>> jazz = playlist.Jazz()
+>>> jazz.attach(simon)
+>>> jazz.attach(tina)
+>>> jazz.add_track('Miles Davis - Freedie Freeloader')
+> Updating user Simon
+> Updating user Tina
+>>> simon.play_songs()
+Playing [['Miles Davis - Freedie Freeloader']] to Simon
+>>> jazz.add_track('BB king - song')
+> Updating user Simon
+> Updating user Tina
+>>> simon.play_songs()
+Playing [['Miles Davis - Freedie Freeloader', 'BB king - song'], ['Miles Davis - Freedie Freeloader', 'BB king - song']] to Simon
+>>> 
+
