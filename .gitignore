@@ -3,6 +3,9 @@
 **/env/*
 **/.env/*
 
+#Ignore python compiled files
+*.pyc
+
 #Visual studio code configuration
 .vscode/*
 

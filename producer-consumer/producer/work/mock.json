@@ -1,0 +1,8 @@
+{
+    "hostname": "10.0.0.1",
+    "vars": {
+        "var_1": "foo",
+        "var_2": "bar",
+        "var_3": "bazinga"
+    }
+}

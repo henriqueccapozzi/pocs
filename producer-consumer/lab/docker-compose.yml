@@ -1,0 +1,36 @@
+version: '3'
+services:
+  clients:
+    hostname: client
+    image: henriqueccapozzi/anpbits:client-1.0.1
+    deploy:
+      replicas: 5
+    cpus: 0.3
+
+  scheduler:
+    build: ../client/
+    command: tail -f /dev/null
+    working_dir: /work
+    volumes:
+      - /home/henrique/Documents/projetos/pocs/producer-consumer/producer/work:/work
+
+  controler:
+    build: ./ansible-worker
+    command: tail -f /dev/null
+    cpus: 1
+    working_dir: /work
+    volumes:
+      - /home/henrique/Documents/projetos/pocs/producer-consumer/producer/work:/work
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.8-management-alpine
+    cpus: 0.5
+    mem_limit: 500Mb
+    ports:
+    - 8080:15672
+    volumes: 
+    - rabbitmq-data:/var/lib/rabbitmq
+
+volumes: 
+  rabbitmq-data:
