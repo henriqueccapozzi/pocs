@@ -1,0 +1,54 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    "pre": {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3.6"
+        },
+        "changed": false,
+        "failed": false,
+        "output": {
+            "data": {
+                "@xmlns": "urn:ietf:params:xml:ns:netconf:base:1.0",
+                "@xmlns:nc": "urn:ietf:params:xml:ns:netconf:base:1.0",
+                "interfaces": {
+                    "@xmlns": "http://openconfig.net/yang/interfaces",
+                    "interface": {
+                        "config": {
+                            "enabled": "false",
+                            "name": "GigabitEthernet0/0/0/1",
+                            "type": {
+                                "#text": "idx:ethernetCsmacd",
+                                "@xmlns:idx": "urn:ietf:params:xml:ns:yang:iana-if-type"
+                            }
+                        },
+                        "ethernet": {
+                            "@xmlns": "http://openconfig.net/yang/interfaces/ethernet",
+                            "config": {
+                                "auto-negotiate": "false"
+                            }
+                        },
+                        "name": "GigabitEthernet0/0/0/1"
+                    }
+                }
+            }
+        }
+    }
+  tasks:
+  - set_fact:
+      xmlns: "{{ pre.output.data['@xmlns'] }}"
+  - debug: var=xmlns
+
+  # - debug: var=pre.output.data.interfaces
+
+  # - set_fact:
+  #     updated_interface_config: "{{ pre.output.data.interfaces.interface.config | combine({'description':'bar'}) }}"
+  # - debug: var=updated_interface_config
+
+  # - set_fact:
+  #     updated_interface: "{{ pre.output.data.interfaces.interface | combine({'config': updated_interface_config})  }}"
+  # - debug: var=updated_interface
+
+  # - set_fact:
+  #     updated_payload: "{{ pre.output.data.interfaces | combine({'interface': updated_interface})  }}"
+  # - debug: var=updated_payload

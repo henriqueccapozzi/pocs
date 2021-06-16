@@ -1,0 +1,65 @@
+- hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: ansible.netcommon.netconf
+    ansible_port: 10000
+    ansible_password: C1sco12345
+  tasks:
+
+  - name: define a xml filter for netconf
+    set_fact:
+      filter:
+        interfaces:
+          "@xmlns": "http://openconfig.net/yang/interfaces"
+          interface:
+            name: "GigabitEthernet0/0/0/1"
+  
+  - name: Query data via netconf
+    ansible.netcommon.netconf_get:
+      source: running
+      filter: "{{ filter }}"
+      display: native
+    register: pre
+
+  - name: Update the interface config block
+    set_fact:
+      updated_interface_config: "{{ pre.output.data.interfaces.interface.config | combine({'description':'bar'}) }}"
+
+  - name: Update the interface block
+    set_fact:
+      updated_interface: "{{ pre.output.data.interfaces.interface | combine({'config': updated_interface_config})  }}"
+
+  - name: Update the netconf payload
+    set_fact:
+      updated_payload: "{{ pre.output.data.interfaces | combine({'interface': updated_interface})  }}"
+
+  - name: Send the update to the device - jeito 1
+    ansible.netcommon.netconf_config:
+      content:
+        config:
+          interfaces: "{{ updated_payload }}"
+    tags: never
+
+  - name: Send the update to the device - jeito 2
+    ansible.netcommon.netconf_config:
+      content:
+        config:
+          interfaces:
+            "@xmlns": "http://openconfig.net/yang/interfaces"
+            interface: 
+              - name: "{{ pre.output.data.interfaces.interface.name }}"
+                config:
+                  description: "bar"
+              - name: "GigabitEthernet0/0/0/2"
+                config:
+                  description: "bar"
+
+  - name: Query data via netconf again
+    ansible.netcommon.netconf_get:
+      source: running
+      filter: "{{ filter }}"
+      display: native
+    register: post
+
+  - debug: var=pre.output.data.interfaces.interface
+  - debug: var=post.output.data.interfaces.interface

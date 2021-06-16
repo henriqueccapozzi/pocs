@@ -1,0 +1,2 @@
+;ios-xe-mgmt.cisco.com ansible_user=developer
+sbx-iosxr-mgmt.cisco.com ansible_user=admin
