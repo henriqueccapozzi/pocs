@@ -124,14 +124,20 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn" 
 
-AWS_ACCESS_KEY_ID = ""
-AWS_SECRET_ACCESS_KEY = ""
-AWS_STORAGE_BUCKET_NAME = ""
-AWS_S3_ENDPOINT_URL = "https://s3.sa-east-1.amazonaws.com/"
+
+AWS_ACCESS_KEY_ID = "_"
+AWS_SECRET_ACCESS_KEY = "_"
+
+S3_ROOT_FOLDER_NAME = "try-django-henrique"
+AWS_STORAGE_BUCKET_NAME = S3_ROOT_FOLDER_NAME
+AWS_S3_ENDPOINT_URL = "" # Paste here the 'Pre Authenticated Request' COMPLETE URL
+# A folder with name of AWS_STORAGE_BUCKET_NAME will be created 
+
+
+
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
 }
-AWS_LOCATION = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.sa-east-1.amazonaws.com/"
 
 DEFAULT_FILE_STORAGE = "cdn.backends.MediaRootS3BotoStorage"
 STATICFILES_STORAGE = "cdn.backends.StaticRootS3BotoStorage"
