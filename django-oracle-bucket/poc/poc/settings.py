@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'foo'
 ]
 
 MIDDLEWARE = [
@@ -125,15 +126,13 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn" 
 
 
-AWS_ACCESS_KEY_ID = "_"
-AWS_SECRET_ACCESS_KEY = "_"
-
-S3_ROOT_FOLDER_NAME = "try-django-henrique"
-AWS_STORAGE_BUCKET_NAME = S3_ROOT_FOLDER_NAME
-AWS_S3_ENDPOINT_URL = "" # Paste here the 'Pre Authenticated Request' COMPLETE URL
-# A folder with name of AWS_STORAGE_BUCKET_NAME will be created 
+# This key is already deleted
+AWS_ACCESS_KEY_ID = "e06cf98c82f650a11fa57246cd907f9703321fca"
+AWS_SECRET_ACCESS_KEY = "40GXj2OXXqASrEQZ+5jzlzO1zlNu4jUKcS0QL41R2+E="
 
 
+AWS_STORAGE_BUCKET_NAME = "try-django-henrique"
+AWS_S3_ENDPOINT_URL = "https://grcqunjr5vfy.compat.objectstorage.sa-saopaulo-1.oraclecloud.com"
 
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
